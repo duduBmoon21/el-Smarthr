@@ -13,23 +13,28 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
+      - name: Install Composer dependencies
+        run: composer install --no-progress --no-suggest --prefer-dist --optimize-autoloader
+
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
           node-version: '16'
 
-      - name: Install dependencies
+      - name: Install NPM dependencies and build
         run: |
           npm install
           npm run build
 
-      - name: Deploy to cPanel
+      - name: Deploy to cPanel via FTP
         env:
-          CPANEL_USER: ${{ secrets.CPANEL_USER }}
-          CPANEL_PASS: ${{ secrets.CPANEL_PASS }}
-          CPANEL_HOST: ${{ secrets.CPANEL_HOST }}
+          FTP_SERVER: ${{ secrets.FTP_SERVER }}
+          FTP_USERNAME: ${{ secrets.FTP_USERNAME }}
+          FTP_PASSWORD: ${{ secrets.FTP_PASSWORD }}
         run: |
-          curl -u $CPANEL_USER:$CPANEL_PASS \
-          -T public/css/* \
-          -T public/js/* \
-          /home/ducodeep/elhradama01.ducodeverse.com/public/
+          lftp -e "
+          set ftp:ssl-allow no;
+          mirror --reverse --delete --verbose \
+          public/ /home/ducodeep/elhradama01.ducodeverse.com/public/;
+          bye;
+          " -u $FTP_USERNAME,$FTP_PASSWORD $FTP_SERVER
