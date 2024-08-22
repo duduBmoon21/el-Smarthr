@@ -18,27 +18,11 @@ jobs:
         with:
           node-version: '18'
 
-      - name: Install NPM dependencies and build
-        run: |
-          npm install
-          npm run build
-          npm run dev
-
-      - name: Clear npm cache
-        run: npm cache clean --force
+      - name: Install dependencies
+        run: npm ci
         
-      - name: List files in vendor/livewire/livewire/dist
-        run: ls -R vendor/livewire/livewire/dist
-
-          
-      - name: Set up PHP
-        uses: shivammathur/setup-php@v2
-        with:
-          php-version: '8.2' # Adjust to match your PHP version
-          extensions: mbstring, xml, mysql, bcmath # Add any necessary PHP extensions
-
-      - name: Install Composer dependencies
-        run: composer install
+      - name: Build
+        run: npm run build
       
       - name: Deploy to cPanel via FTP
         env:
