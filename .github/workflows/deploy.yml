@@ -33,6 +33,9 @@ jobs:
           php-version: '8.2' # Adjust to match your PHP version
           extensions: mbstring, xml, mysql, bcmath # Add any necessary PHP extensions
 
+      - name: List files in vendor directory
+        run: ls -R vendor/livewire/livewire/dist
+
       - name: Deploy to cPanel via FTP
         env:
           FTP_SERVER: ${{ secrets.FTP_SERVER }}
