@@ -1,5 +1,6 @@
 import { defineConfig } from "vite";
 import laravel from "laravel-vite-plugin";
+import path from "path"; // Ensure path is imported
 import collectModuleAssetsPaths from "./vite-module-loader.js";
 
 async function getConfig() {
@@ -19,6 +20,7 @@ async function getConfig() {
                 input: allPaths,
                 refresh: true,
             }),
+            // Include other plugins here
         ],
         define: {
             "process.env.IS_PREACT": JSON.stringify("true"),
@@ -29,10 +31,9 @@ async function getConfig() {
         resolve: {
             alias: {
                 // Alias to resolve livewire's ESM module
-              '@livewire': path.resolve(__dirname, 'vendor/livewire/livewire/dist/livewire.esm'),
+                '@livewire': path.resolve(__dirname, 'vendor/livewire/livewire/dist/livewire.esm'),
             },
         },
-        plugins: [vite()],
         assetsInlineLimit: 0,
     });
 }
