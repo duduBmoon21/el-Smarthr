@@ -26,7 +26,14 @@ async function getConfig() {
         optimizeDeps: {
             exclude: ["js-big-decimal"],
         },
-        assetsInlineLimit: 0
+        resolve: {
+            alias: {
+                // Alias to resolve livewire's ESM module
+              '@livewire': path.resolve(__dirname, 'vendor/livewire/livewire/dist/livewire.esm'),
+            },
+        },
+        plugins: [vue()],
+        assetsInlineLimit: 0,
     });
 }
 

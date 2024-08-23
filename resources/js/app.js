@@ -1,7 +1,9 @@
 import "./bootstrap";
 import $ from 'jquery';
 window.jQuery = window.$ = $
-import { Livewire, Alpine } from '../../vendor/livewire/livewire/dist/livewire.esm';
+// import { Livewire, Alpine } from '../../vendor/livewire/livewire/dist/livewire.esm';
+import { Livewire, Alpine } from '@livewire';
+
 import sort from '@alpinejs/sort'
 window.Livewire = Livewire 
 window.Alpine = Alpine
