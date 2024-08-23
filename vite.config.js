@@ -21,6 +21,7 @@ async function getConfig() {
                 refresh: true,
             }),
             // Include other plugins here
+           
         ],
         define: {
             "process.env.IS_PREACT": JSON.stringify("true"),
@@ -34,6 +35,7 @@ async function getConfig() {
                 '@livewire': path.resolve(__dirname, 'vendor/livewire/livewire/dist/livewire.esm'),
             },
         },
+        plugins: [vite()],
         assetsInlineLimit: 0,
     });
 }
