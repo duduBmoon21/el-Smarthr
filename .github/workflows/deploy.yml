@@ -18,11 +18,19 @@ jobs:
         with:
           node-version: '18'
 
-      - name: Install dependencies
-        run: npm ci
+      - name: Build and Test
+        run: |
+            # Replace with your build and test commands
+            npm install
+            npm i livewire
+            npm run build
+            npm test
         
       - name: Build
-        run: npm run build
+        run: npm run dev
+        
+      - name: clear cache
+        run: npm cache clean --force
       
       - name: Deploy to cPanel via FTP
         env:
