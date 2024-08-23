@@ -32,7 +32,7 @@ async function getConfig() {
               '@livewire': path.resolve(__dirname, 'vendor/livewire/livewire/dist/livewire.esm'),
             },
         },
-        plugins: [vue()],
+        plugins: [vite()],
         assetsInlineLimit: 0,
     });
 }
